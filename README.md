@@ -9,3 +9,5 @@ See also:
 
 - https://github.com/grpc/grpc/issues/21867
 - https://github.com/grpc/grpc/pull/22894
+
+This is using Paket and is not buildable alone. Should be adapted for your real build environment.
