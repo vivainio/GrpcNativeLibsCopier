@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  <Target Name="CopyGrpcNativeLibsToAppDirs" AfterTargets="AfterBuild">
+    <CreateProperty Value="%(PackageReference.Version)" Condition="%(PackageReference.Identity) == 'Grpc.Core'">
+      <Output TaskParameter="Value" PropertyName="GrpcCoreVersion" />
+    </CreateProperty>
+
+    <!-- add desired output paths here -->
+    <ItemGroup>
+      <OutPath Include="$(OutputPathServerSide)"/>
+      <OutPath Include="$(OutputPathOtherDir)"/>
+      <OutPath Include="$(OutputPathUnitTests)"/>
+    </ItemGroup>
+
+    <!-- the native dll (grpc_csharp_ext.x64.dll) location may change between grpc.core updates -->
+    <PropertyGroup>
+      <SourcePattern>$(NuGetPackageRoot)Grpc.Core\$(GrpcCoreVersion)**\runtimes\win\native\*.dll</SourcePattern>
+    </PropertyGroup>
+
+    <Message Importance="high" Text="Grpc.Core version: $(GrpcCoreVersion)" />
+
+
+    <Exec Command="python lazyco.py --from $(SourcePattern) --to @(OutPath, ' ')"/>
+  </Target>
+
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+</Project>
