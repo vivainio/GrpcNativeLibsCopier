@@ -11,3 +11,24 @@ See also:
 - https://github.com/grpc/grpc/pull/22894
 
 This is using Paket and is not buildable alone. Should be adapted for your real build environment.
+
+
+## Usage
+
+Modify your Directory.Build.props file by adding the following rule:
+
+```xml
+  <PropertyGroup>
+      <Grpc_SkipNativeLibsCopy>true</Grpc_SkipNativeLibsCopy>
+  </PropertyGroup>
+```
+
+This will prevent Grpc.Core nuget package from trying to copy the file on it's own (because it can fail and kill your whole build).
+
+Then, just run 
+```
+msbuild GrpcNativeLibsCopier.csproj
+```
+somewhere in your build to actually copy your files.
+
+Note that you need to add the wanted <OutPath> entries describing the target directories to the csproj files yourself. There is no automatic discovery whatsoever.
