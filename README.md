@@ -15,7 +15,7 @@ This is using Paket and is not buildable alone. Should be adapted for your real 
 
 ## Usage
 
-Modify your Directory.Build.props file by adding the following rule:
+Modify your problematic csproj file, or your global [Directory.Build.props](https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2019#directorybuildprops-and-directorybuildtargets) file if you have one, by adding the following rule:
 
 ```xml
   <PropertyGroup>
