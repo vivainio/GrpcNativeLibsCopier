@@ -32,3 +32,7 @@ msbuild GrpcNativeLibsCopier.csproj
 somewhere in your build to actually copy your files.
 
 Note that you need to add the wanted <OutPath> entries describing the target directories to the csproj files yourself. There is no automatic discovery whatsoever.
+
+## LICENSE
+
+MIT
